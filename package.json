@@ -31,11 +31,13 @@
     "chalk": "^4.1.2",
     "cli-table3": "^0.6.2",
     "dotenv": "^16.0.1",
-    "ora": "^6.1.2"
+    "ora": "^6.1.2",
+    "qs": "^6.11.0"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "@types/node": "^18.7.1",
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "esbuild": "^0.15.0",
