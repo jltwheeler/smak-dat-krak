@@ -1,16 +1,21 @@
 import qs from "qs";
+import moment from "moment";
 import { createHash, createHmac } from "crypto";
 
-interface IReqParams extends Record<string, string | number> {
-  nonce: string;
+interface IReqParams extends Record<string, string | number | undefined> {
+  nonce?: string;
 }
 
 interface Props {
   path: string;
   reqParams: IReqParams;
   secret: string;
-  nonce: string;
+  nonce?: string;
 }
+
+export const getNonceValue = () => {
+  return (moment().unix() * 1000).toString();
+};
 
 export const createAPISignature = ({
   path,
