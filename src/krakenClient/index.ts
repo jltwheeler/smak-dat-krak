@@ -54,6 +54,8 @@ export class KrakenClient {
       )
     ).data;
 
+    // TODO: for responses over 50 results, need to add pagination counter using 'ofs' (integer) parameter e.g. 'ofs=50'
+
     if (data.error?.length) throw new Error(data.error?.join(" | "));
 
     return data.result;

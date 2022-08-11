@@ -1,4 +1,4 @@
-export class Token {
+export class Asset {
   name: string;
 
   constructor(name: string) {
