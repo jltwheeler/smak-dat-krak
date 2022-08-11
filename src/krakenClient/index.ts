@@ -1,6 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import qs from "qs";
+import { TradeHistory, TradeHistoryResp } from "../types";
 import { createAPISignature } from "../utils";
 import { getNonceValue } from "../utils/createAPISignature";
 
@@ -26,8 +27,8 @@ export class KrakenClient {
     this.apiKey = process.env["KRAKEN_PUBLIC_KEY"];
   }
 
-  async getAccountBalance() {
-    const path = "/0/private/Balance";
+  async getTradeHistory(): Promise<TradeHistory | undefined> {
+    const path = "/0/private/TradesHistory";
     const nonce = getNonceValue();
     const reqParams = { nonce };
 
@@ -38,15 +39,23 @@ export class KrakenClient {
       nonce,
     });
 
-    return axios
-      .post(`${BASE_URL}${path}`, qs.stringify(reqParams), {
-        headers: {
-          "API-Key": this.apiKey,
-          "API-Sign": sig,
-          "Content-Type": "application/x-www-form-urlencoded",
-          "User-Agent": "Smak Dat Krak",
-        },
-      })
-      .then((d) => d.data);
+    const data = (
+      await axios.post<TradeHistoryResp>(
+        `${BASE_URL}${path}`,
+        qs.stringify(reqParams),
+        {
+          headers: {
+            "API-Key": this.apiKey,
+            "API-Sign": sig,
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": "Smak Dat Krak",
+          },
+        }
+      )
+    ).data;
+
+    if (data.error?.length) throw new Error(data.error?.join(" | "));
+
+    return data.result;
   }
 }

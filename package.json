@@ -6,11 +6,11 @@
   "scripts": {
     "build": "node esbuild.config.js",
     "clean": "rm -rf dist",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/main.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "test:watch": "jest --watch",
-    "docs": "typedoc --entryPoints src/index.ts"
+    "docs": "typedoc --entryPoints src/main.ts"
   },
   "repository": {
     "type": "git",

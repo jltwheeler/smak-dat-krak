@@ -1,3 +1,4 @@
 import { createAPISignature } from "./createAPISignature";
+import { isString } from "./guards";
 
-export { createAPISignature };
+export { createAPISignature, isString };
