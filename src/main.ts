@@ -1,5 +1,5 @@
 import { KrakenClient } from "./krakenClient";
-import { getUniquePairs } from "./utils/dataTransformers";
+import { composeUniquePairs } from "./utils/dataTransformers";
 
 const main = async () => {
   const kraken = new KrakenClient();
@@ -8,7 +8,7 @@ const main = async () => {
     const trades = await kraken.getTradeHistory();
 
     if (trades?.trades) {
-      const uniquePairs = getUniquePairs(trades.trades);
+      const uniquePairs = composeUniquePairs(trades.trades);
       console.log(uniquePairs);
     }
   } catch (err) {
