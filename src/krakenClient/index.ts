@@ -1,7 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import qs from "qs";
-import { TradeHistory, TradeHistoryResp } from "../types";
+import { Ticker, TickerResp, TradeHistory, TradeHistoryResp } from "../types";
 import { createAPISignature } from "../utils";
 import { getNonceValue } from "../utils/createAPISignature";
 
@@ -25,6 +25,20 @@ export class KrakenClient {
         "Please ensure you have defined a KRAKEN_PUBLIC_KEY value in the .env file"
       );
     this.apiKey = process.env["KRAKEN_PUBLIC_KEY"];
+  }
+
+  async getTickerInfo(pair: string): Promise<Ticker | undefined> {
+    const data = (
+      await axios.get<TickerResp>(`${BASE_URL}/0/public/Ticker`, {
+        params: {
+          pair,
+        },
+      })
+    ).data;
+
+    if (data.error?.length) throw new Error(data.error?.join(" | "));
+
+    return data.result;
   }
 
   async getTradeHistory(): Promise<TradeHistory | undefined> {

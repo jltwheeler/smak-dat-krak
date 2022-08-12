@@ -1,8 +1,10 @@
 import { Trades, Trade } from "../../types";
 import { isString } from "../guards";
 
-export const composeUniquePairs = (trades: Trades) =>
-  Object.entries(trades).reduce((prev: Record<string, Trade[]>, curr) => {
+type UniquePairs = Record<string, Trade[]>;
+
+export const composeUniquePairs = (trades: Trades): UniquePairs =>
+  Object.entries(trades).reduce<UniquePairs>((prev, curr) => {
     const { pair } = curr[1];
 
     if (isString(pair)) {
