@@ -4,14 +4,23 @@ your Kraken exchange portfolio.
 
 ## Context
 
-blah blah
+I wanted to create a very lightweight and simple to use app that allows users
+to see useful metrics for their crypto portfolio on the Kraken Exchange. These 
+metrics include:
+- DCA value
+- Total profit / loss per token - at present, last 24 hours, last week
+- Total profit / loss in portfolio - at present, last 24 hours, last week
 
 ## Set up
 
-1. Create an API key for the Kraken REST API that has read values for trades,
-  balances and ledgers at a minimum.
-2. Create a `.env` file (using the `.env.local` file as a reference for the
-  required keys) and paste in your Kraken Public and Private API keys
+1. Create an API key for the Kraken REST API that has at miniumum the following
+   permissions:
+   - Query funds
+   - Query open orders & trades
+   - Query closed orders & trades
+   - Query ledger entries
+2. Create an `.env` file (using the `.env.local` file as a reference for the
+  required keys) and paste in your Kraken API key and secret (from Step 1.)
 3. Fill in your desired configuration in the `config.json` file
 4. Run `npm run start`
 5. lfg... profit 🚀 gn
